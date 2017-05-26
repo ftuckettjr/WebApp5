@@ -1,0 +1,613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="qwertyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="articles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="insert" Type="datetime" Nullable="false" />
+          <Property Name="update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="encryption">
+          <Key>
+            <PropertyRef Name="uuid" />
+          </Key>
+          <Property Name="uuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="insert_dt" Type="datetime" Nullable="false" />
+          <Property Name="site" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="idioma">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="translation1" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="translation2" Type="varchar" MaxLength="250" />
+          <Property Name="example" Type="varchar" MaxLength="250" />
+          <Property Name="insert" Type="datetime" Nullable="false" />
+          <Property Name="update" Type="datetime" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="10" />
+          <Property Name="langid1" Type="int" />
+          <Property Name="langid2" Type="int" />
+          <Property Name="synonym" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'qwerty.dbo.imagez' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="imagez">
+          <Key>
+            <PropertyRef Name="BLOBName" />
+            <PropertyRef Name="BLOBimage" />
+            <PropertyRef Name="uuid" />
+            <PropertyRef Name="insert_dt" />
+          </Key>
+          <Property Name="BLOBName" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="caption" Type="varchar" MaxLength="25" />
+          <Property Name="description" Type="varchar" MaxLength="75" />
+          <Property Name="BLOBimage" Type="varbinary(max)" Nullable="false" />
+          <Property Name="BLOBimage_tn" Type="varbinary(max)" />
+          <Property Name="category" Type="varchar" MaxLength="25" />
+          <Property Name="uuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="insert_dt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="language">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="insert" Type="datetime" Nullable="false" />
+          <Property Name="update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'qwerty.dbo.privacy' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="privacy">
+          <Key>
+            <PropertyRef Name="uuid" />
+            <PropertyRef Name="seed" />
+            <PropertyRef Name="key" />
+            <PropertyRef Name="datasource" />
+            <PropertyRef Name="library" />
+            <PropertyRef Name="insert_dt" />
+          </Key>
+          <Property Name="uuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="seed" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="key" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="datasource" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="library" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="insert_dt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'qwerty.dbo.ServerLogonHistory' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ServerLogonHistory">
+          <Property Name="SystemUser" Type="varchar" MaxLength="512" />
+          <Property Name="DBUser" Type="varchar" MaxLength="512" />
+          <Property Name="App" Type="varchar" MaxLength="512" />
+          <Property Name="SPID" Type="int" />
+          <Property Name="LogonTime" Type="datetime" />
+        </EntityType>-->
+        <EntityType Name="store_map">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="uuid" Type="uniqueidentifier" />
+          <Property Name="insert_dt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'qwerty.dbo.store_price' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="store_price">
+          <Key>
+            <PropertyRef Name="product" />
+            <PropertyRef Name="qty" />
+            <PropertyRef Name="oz" />
+            <PropertyRef Name="price" />
+            <PropertyRef Name="uuid" />
+            <PropertyRef Name="insert_dt" />
+          </Key>
+          <Property Name="storeid" Type="int" />
+          <Property Name="product" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="qty" Type="int" Nullable="false" />
+          <Property Name="oz" Type="float" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="price_unit" Type="money" />
+          <Property Name="price_oz" Type="money" />
+          <Property Name="extra" Type="varchar" MaxLength="75" />
+          <Property Name="uuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="insert_dt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar(max)" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="insert_dt" Type="datetime" Nullable="false" />
+          <Property Name="update_dt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Function Name="spGetEncrypt2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="start" Type="int" Mode="In" />
+          <Parameter Name="end" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetKey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="lib" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spGetPrices" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetStores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spInsertENC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="msg" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertImagez" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="category" Type="varchar" Mode="In" />
+          <Parameter Name="blob" Type="varchar" Mode="In" />
+          <Parameter Name="caption" Type="varchar" Mode="In" />
+          <Parameter Name="desc" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spSelectENC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spUserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="qwertyModelStoreContainer">
+          <EntitySet Name="articles" EntityType="Self.articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="encryption" EntityType="Self.encryption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="idioma" EntityType="Self.idioma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="language" EntityType="Self.language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="store_map" EntityType="Self.store_map" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imagez" EntityType="Self.imagez" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [imagez].[BLOBName] AS [BLOBName], 
+    [imagez].[caption] AS [caption], 
+    [imagez].[description] AS [description], 
+    [imagez].[BLOBimage] AS [BLOBimage], 
+    [imagez].[BLOBimage_tn] AS [BLOBimage_tn], 
+    [imagez].[category] AS [category], 
+    [imagez].[uuid] AS [uuid], 
+    [imagez].[insert_dt] AS [insert_dt]
+    FROM [dbo].[imagez] AS [imagez]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="privacy" EntityType="Self.privacy" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [privacy].[uuid] AS [uuid], 
+    [privacy].[seed] AS [seed], 
+    [privacy].[key] AS [key], 
+    [privacy].[datasource] AS [datasource], 
+    [privacy].[library] AS [library], 
+    [privacy].[insert_dt] AS [insert_dt]
+    FROM [dbo].[privacy] AS [privacy]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="store_price" EntityType="Self.store_price" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [store_price].[storeid] AS [storeid], 
+    [store_price].[product] AS [product], 
+    [store_price].[qty] AS [qty], 
+    [store_price].[oz] AS [oz], 
+    [store_price].[price] AS [price], 
+    [store_price].[price_unit] AS [price_unit], 
+    [store_price].[price_oz] AS [price_oz], 
+    [store_price].[extra] AS [extra], 
+    [store_price].[uuid] AS [uuid], 
+    [store_price].[insert_dt] AS [insert_dt]
+    FROM [dbo].[store_price] AS [store_price]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="qwertyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="article">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="insert" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="encryption">
+          <Key>
+            <PropertyRef Name="uuid" />
+          </Key>
+          <Property Name="uuid" Type="Guid" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="insert_dt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="site" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="idioma">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="translation1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="translation2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="example" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="insert" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="langid1" Type="Int32" />
+          <Property Name="langid2" Type="Int32" />
+          <Property Name="synonym" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="language">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="insert" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="store_map">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="uuid" Type="Guid" />
+          <Property Name="insert_dt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="insert_dt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_dt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="imagez">
+          <Key>
+            <PropertyRef Name="BLOBName" />
+            <PropertyRef Name="BLOBimage" />
+            <PropertyRef Name="uuid" />
+            <PropertyRef Name="insert_dt" />
+          </Key>
+          <Property Name="BLOBName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="caption" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="BLOBimage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="BLOBimage_tn" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="category" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="uuid" Type="Guid" Nullable="false" />
+          <Property Name="insert_dt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="privacy">
+          <Key>
+            <PropertyRef Name="uuid" />
+            <PropertyRef Name="seed" />
+            <PropertyRef Name="key" />
+            <PropertyRef Name="datasource" />
+            <PropertyRef Name="library" />
+            <PropertyRef Name="insert_dt" />
+          </Key>
+          <Property Name="uuid" Type="Guid" Nullable="false" />
+          <Property Name="seed" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="key" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="datasource" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="library" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="insert_dt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="store_price">
+          <Key>
+            <PropertyRef Name="product" />
+            <PropertyRef Name="qty" />
+            <PropertyRef Name="oz" />
+            <PropertyRef Name="price" />
+            <PropertyRef Name="uuid" />
+            <PropertyRef Name="insert_dt" />
+          </Key>
+          <Property Name="storeid" Type="Int32" />
+          <Property Name="product" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="qty" Type="Int32" Nullable="false" />
+          <Property Name="oz" Type="Double" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="price_unit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="price_oz" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="extra" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="uuid" Type="Guid" Nullable="false" />
+          <Property Name="insert_dt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="qwertyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="articles" EntityType="Self.article" />
+          <EntitySet Name="encryptions" EntityType="Self.encryption" />
+          <EntitySet Name="idiomas" EntityType="Self.idioma" />
+          <EntitySet Name="languages" EntityType="Self.language" />
+          <EntitySet Name="store_map" EntityType="Self.store_map" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="imagezs" EntityType="Self.imagez" />
+          <EntitySet Name="privacies" EntityType="Self.privacy" />
+          <EntitySet Name="store_price" EntityType="Self.store_price" />
+          <FunctionImport Name="spGetEncrypt2" ReturnType="Collection(qwertyModel.spGetEncrypt2_Result)">
+            <Parameter Name="start" Mode="In" Type="Int32" />
+            <Parameter Name="end" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetKey" ReturnType="Collection(qwertyModel.spGetKey_Result)">
+            <Parameter Name="lib" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetPrices" ReturnType="Collection(qwertyModel.spGetPrices_Result)" />
+          <FunctionImport Name="spGetStores" ReturnType="Collection(qwertyModel.spGetStores_Result)" />
+          <FunctionImport Name="spInsertENC">
+            <Parameter Name="msg" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertImagez">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="category" Mode="In" Type="String" />
+            <Parameter Name="blob" Mode="In" Type="String" />
+            <Parameter Name="caption" Mode="In" Type="String" />
+            <Parameter Name="desc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spSelectENC" ReturnType="Collection(String)" />
+          <FunctionImport Name="spUserLogin" ReturnType="Collection(qwertyModel.spUserLogin_Result)">
+            <Parameter Name="userid" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="spGetEncrypt2_Result">
+          <Property Type="Guid" Name="uuid" Nullable="false" />
+          <Property Type="String" Name="message" Nullable="false" MaxLength="300" />
+          <Property Type="DateTime" Name="insert_dt" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="site" Nullable="false" />
+          <Property Type="Int64" Name="num" Nullable="true" />
+          <Property Type="Int32" Name="total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spGetKey_Result">
+          <Property Type="String" Name="seed" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="key" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="datasource" Nullable="false" MaxLength="100" />
+          <Property Type="Guid" Name="uuid" Nullable="false" />
+          <Property Type="DateTime" Name="insert_dt" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="spGetPrices_Result">
+          <Property Type="Int32" Name="storeid" Nullable="true" />
+          <Property Type="String" Name="product" Nullable="false" MaxLength="25" />
+          <Property Type="Int32" Name="qty" Nullable="false" />
+          <Property Type="Double" Name="oz" Nullable="false" />
+          <Property Type="Decimal" Name="price" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="price_unit" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="price_oz" Nullable="true" Precision="19" />
+          <Property Type="String" Name="extra" Nullable="true" MaxLength="75" />
+          <Property Type="Guid" Name="uuid" Nullable="false" />
+          <Property Type="DateTime" Name="insert_dt" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="25" />
+          <Property Type="Guid" Name="uuid1" Nullable="true" />
+          <Property Type="DateTime" Name="insert_dt1" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="row_num" Nullable="true" />
+          <Property Type="Int64" Name="rank_dense" Nullable="true" />
+          <Property Type="Int64" Name="rank" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spGetStores_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="spUserLogin_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="userid" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="false" />
+          <Property Type="Boolean" Name="active" Nullable="false" />
+          <Property Type="DateTime" Name="insert_dt" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="update_dt" Nullable="false" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="qwertyModelStoreContainer" CdmEntityContainer="qwertyEntities">
+          <EntitySetMapping Name="articles">
+            <EntityTypeMapping TypeName="qwertyModel.article">
+              <MappingFragment StoreEntitySet="articles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="insert" ColumnName="insert" />
+                <ScalarProperty Name="update" ColumnName="update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="encryptions">
+            <EntityTypeMapping TypeName="qwertyModel.encryption">
+              <MappingFragment StoreEntitySet="encryption">
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+                <ScalarProperty Name="site" ColumnName="site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="idiomas">
+            <EntityTypeMapping TypeName="qwertyModel.idioma">
+              <MappingFragment StoreEntitySet="idioma">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="translation1" ColumnName="translation1" />
+                <ScalarProperty Name="translation2" ColumnName="translation2" />
+                <ScalarProperty Name="example" ColumnName="example" />
+                <ScalarProperty Name="insert" ColumnName="insert" />
+                <ScalarProperty Name="update" ColumnName="update" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="langid1" ColumnName="langid1" />
+                <ScalarProperty Name="langid2" ColumnName="langid2" />
+                <ScalarProperty Name="synonym" ColumnName="synonym" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="languages">
+            <EntityTypeMapping TypeName="qwertyModel.language">
+              <MappingFragment StoreEntitySet="language">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="insert" ColumnName="insert" />
+                <ScalarProperty Name="update" ColumnName="update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="store_map">
+            <EntityTypeMapping TypeName="qwertyModel.store_map">
+              <MappingFragment StoreEntitySet="store_map">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="qwertyModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+                <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imagezs">
+            <EntityTypeMapping TypeName="qwertyModel.imagez">
+              <MappingFragment StoreEntitySet="imagez">
+                <ScalarProperty Name="BLOBName" ColumnName="BLOBName" />
+                <ScalarProperty Name="caption" ColumnName="caption" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="BLOBimage" ColumnName="BLOBimage" />
+                <ScalarProperty Name="BLOBimage_tn" ColumnName="BLOBimage_tn" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="privacies">
+            <EntityTypeMapping TypeName="qwertyModel.privacy">
+              <MappingFragment StoreEntitySet="privacy">
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="seed" ColumnName="seed" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="datasource" ColumnName="datasource" />
+                <ScalarProperty Name="library" ColumnName="library" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="store_price">
+            <EntityTypeMapping TypeName="qwertyModel.store_price">
+              <MappingFragment StoreEntitySet="store_price">
+                <ScalarProperty Name="storeid" ColumnName="storeid" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="oz" ColumnName="oz" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="price_unit" ColumnName="price_unit" />
+                <ScalarProperty Name="price_oz" ColumnName="price_oz" />
+                <ScalarProperty Name="extra" ColumnName="extra" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetEncrypt2" FunctionName="qwertyModel.Store.spGetEncrypt2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qwertyModel.spGetEncrypt2_Result">
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+                <ScalarProperty Name="site" ColumnName="site" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetKey" FunctionName="qwertyModel.Store.spGetKey">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qwertyModel.spGetKey_Result">
+                <ScalarProperty Name="seed" ColumnName="seed" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="datasource" ColumnName="datasource" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetPrices" FunctionName="qwertyModel.Store.spGetPrices">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qwertyModel.spGetPrices_Result">
+                <ScalarProperty Name="storeid" ColumnName="storeid" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="oz" ColumnName="oz" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="price_unit" ColumnName="price_unit" />
+                <ScalarProperty Name="price_oz" ColumnName="price_oz" />
+                <ScalarProperty Name="extra" ColumnName="extra" />
+                <ScalarProperty Name="uuid" ColumnName="uuid" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="uuid1" ColumnName="uuid1" />
+                <ScalarProperty Name="insert_dt1" ColumnName="insert_dt1" />
+                <ScalarProperty Name="row_num" ColumnName="row_num" />
+                <ScalarProperty Name="rank_dense" ColumnName="rank_dense" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetStores" FunctionName="qwertyModel.Store.spGetStores">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qwertyModel.spGetStores_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spInsertENC" FunctionName="qwertyModel.Store.spInsertENC" />
+          <FunctionImportMapping FunctionImportName="spInsertImagez" FunctionName="qwertyModel.Store.spInsertImagez" />
+          <FunctionImportMapping FunctionImportName="spSelectENC" FunctionName="qwertyModel.Store.spSelectENC" />
+          <FunctionImportMapping FunctionImportName="spUserLogin" FunctionName="qwertyModel.Store.spUserLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="qwertyModel.spUserLogin_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="insert_dt" ColumnName="insert_dt" />
+                <ScalarProperty Name="update_dt" ColumnName="update_dt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
